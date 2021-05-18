@@ -870,7 +870,7 @@ Erstellt ganz viele Channels.
 {prefix}crollen
 Erstellt ganz viele Rollen.
 
-{prefix}lchannel
+{prefix}lkanal
 Löscht alle Channels auf dem Server.
 
 {prefix}lrollen
