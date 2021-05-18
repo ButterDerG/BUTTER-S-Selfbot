@@ -861,6 +861,9 @@ Zeigt dir dein Ping an.
 {prefix}leer
 Sendet einen leeren Text.
 
+{prefix}servername [Name]
+Ändert den Servernamen
+
 ```
 **__𝗦𝗽𝗮𝗺 𝗕𝗲𝗳𝗲𝗵𝗹𝗲__**
 ```
