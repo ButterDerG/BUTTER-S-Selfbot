@@ -1,8 +1,6 @@
 # BUTTERS-Selfbot
 **_butter#0001 selfbot_**
 
-**yo mädels hab meinen privaten selfbot öffentlich gemacht**
-
 könnt ihn gerne benutzen wenn ihr wollt.
 nicht vergessen in der "Config.json" datei deinen discord token reinzumachen.
 hier ein video dazu wie ihr diesen token bekommt: https://www.youtube.com/watch?v=YEgFvgg7ZPI
