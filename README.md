@@ -1,5 +1,5 @@
 # BUTTERS-Selfbot
-**_butter#0001 selfbot_**
+**_butter#0001 selfbot_ [GERMAN]**
 
 könnt ihn gerne benutzen wenn ihr wollt.
 nicht vergessen in der "Config.json" datei deinen discord token reinzumachen.
