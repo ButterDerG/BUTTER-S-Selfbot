@@ -774,118 +774,118 @@ async def optionen(ctx):
     description = f"""
 **__𝗖𝗵𝗮𝘁 𝗕𝗲𝗳𝗲𝗵𝗹𝗲__**
 ```
-{prefix}optionen, help
+{PREFIX}optionen, help
 Zeigt diese Nachricht an.
 
-{prefix}cr
+{PREFIX}cr
 Lässt einen Windows PC crashen sobald man draufklickt.
 
-{prefix}systeminfo
+{PREFIX}systeminfo
 Zeigt dir deine System Informationen an wie CPU, RAM usw.
 
-{prefix}restart
+{PREFIX}restart
 Restartet den Selfbot. (Hilfreich bei Spam-Befehlen)
 
-{prefix}clear [Anzahl]
+{PREFIX}clear [Anzahl]
 Löscht deine Nachrichten im Channel.
 
-{prefix}clearalles
+{PREFIX}clearalles
 Löscht den gesamten Chatverlauf von dir im Channel.
 
-{prefix}reaktion [Text]
+{PREFIX}reaktion [Text]
 Macht einen Reaktionstext auf die Nachricht drüber
 
-{prefix}servername [Name]
+{PREFIX}servername [Name]
 Ändert den Servernamen.
 
-{prefix}login [Token]
+{PREFIX}login [Token]
 Loggt dich über Google Chrome ein.
 
-{prefix}stopp
+{PREFIX}stopp
 Stoppt das Programm.
 
-{prefix}laufzeit
+{PREFIX}laufzeit
 Zeigt die Laufzeit des Selfbots an.
 
-{prefix}bitcoineuro, bitcoinusd, bitcoinfranken
+{PREFIX}bitcoineuro, bitcoinusd, bitcoinfranken
 Zeigt dir den Bitcoin-Wert in Euro, Franken oder USD an.
 
-{prefix}hacke [User]
+{PREFIX}hacke [User]
 Faket einen Hack
 
-{prefix}stream [Titel]
+{PREFIX}stream [Titel]
 Stellt dein Status auf Streamen.
 
-{prefix}spielt [Titel]
+{PREFIX}spielt [Titel]
 Stellt dein Status auf Spielen.
 
-{prefix}hoert [Titel]
+{PREFIX}hoert [Titel]
 Stellt dein Status auf Hören.
 
-{prefix}schaut [Titel]
+{PREFIX}schaut [Titel]
 Stellt dein Status auf Schauen.
 
-{prefix}ip [ip]
+{PREFIX}ip [ip]
 Zeigt die Location, ISP, usw. von der IP an.
 
-{prefix}tokeninfo [Token]
+{PREFIX}tokeninfo [Token]
 Zeigt die Informationen an vom Account.
 
-{prefix}gibtoken
+{PREFIX}gibtoken
 Erstellt einen zufälligen Token
 
-{prefix}kopiere
+{PREFIX}kopiere
 Kopiert den ganzen Server auf dem man drauf ist.
 
-{prefix}speicherav [User]
+{PREFIX}speicherav [User]
 Speichert das Avatar vom User.
 
-{prefix}av
+{PREFIX}av
 Zeigt das Avatar von dir/anderen an.
 
-{prefix}userinfo [User]
+{PREFIX}userinfo [User]
 Zeigt die Userinfo an.
 
-{prefix}em [Text]
+{PREFIX}em [Text]
 Macht dir in der Einbettung einen eigenen Text.
 
-{prefix}ac [Text]
+{PREFIX}ac [Text]
 Schreibt dein Text in Ascii.
 
-{prefix}gibmeme
+{PREFIX}gibmeme
 Gibt dir ein random Meme.
 
-{prefix}ping
+{PREFIX}ping
 Zeigt dir dein Ping an.
 
-{prefix}leer
+{PREFIX}leer
 Sendet einen leeren Text.
 
-{prefix}servername [Name]
+{PREFIX}servername [Name]
 Ändert den Servernamen
 
 ```
 **__𝗦𝗽𝗮𝗺 𝗕𝗲𝗳𝗲𝗵𝗹𝗲__**
 ```
-{prefix}cchannel
+{PREFIX}cchannel
 Erstellt ganz viele Channels.
 
-{prefix}crollen
+{PREFIX}crollen
 Erstellt ganz viele Rollen.
 
-{prefix}lkanal
+{PREFIX}lkanal
 Löscht alle Channels auf dem Server.
 
-{prefix}lrollen
+{PREFIX}lrollen
 Löscht alle Rollen auf dem Server.
 
-{prefix}sp [Text]
+{PREFIX}sp [Text]
 Spamt möglichst viele Nachrichten durchgehend.
 
-{prefix}sb [Anzahl] [Text]
+{PREFIX}sb [Anzahl] [Text]
 Spamt die gewünschte Nachricht in gewünschter Anzahl.
 
-{prefix}re
+{PREFIX}re
 Erwähnt alle Rollen.
 
 ```
