@@ -139,7 +139,7 @@ async def restart(ctx):
 
 @Butter.command()
 async def gibmeme(ctx):
-    await ctx.delete_message(ctx.message)
+    await ctx.message.delete()
     r = requests.get("https://some-random-api.ml/meme").json()
     embed = discord.Embed(color=RandomColor(), timestamp=ctx.message.created_at)
     embed.set_author(name="Hier dein Meme", icon_url="https://cdn.discordapp.com/attachments/746792750971748516/764533886234918922/giphy.gif")
