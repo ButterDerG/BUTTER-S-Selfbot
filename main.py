@@ -17,11 +17,10 @@ with open("Config.json") as f:
     config = json.load(f)
 
 TOKEN = config.get("token")
-PREFIX = config.get("prefix")
+prefix = config.get("prefix")
 
 psutil.cpu_percent(interval=1)
 
-prefix = '.'
 
 def ready():
     print(f"""
@@ -45,7 +44,7 @@ def ready():
 
 {Fore.GREEN}Du bist auf {Fore.WHITE}{len(Butter.guilds)}{Fore.GREEN} Server.
 
-{Fore.WHITE}Gebe {Fore.YELLOW}'{PREFIX}optionen' {Fore.WHITE}ein, um die Befehle anzuschauen.
+{Fore.WHITE}Gebe {Fore.YELLOW}'{prefix}optionen' {Fore.WHITE}ein, um die Befehle anzuschauen.
     """ + Fore.RESET)
 
 def Nitro():
@@ -60,7 +59,7 @@ def RandString():
     return "".join(random.choice(string.ascii_letters + string.digits) for i in range(random.randint(4, 4)))
 
 client = commands.Bot(
-    command_prefix=PREFIX,
+    command_prefix=prefix,
     self_bot=True
 )
 Butter = client
@@ -107,7 +106,7 @@ async def em(ctx, *, a_sMessage):
     embed = discord.Embed(description=a_sMessage, color=RandomColor(), timestamp=ctx.message.created_at)
     embed.set_author(name=ctx.message.author.name, icon_url = client.user.avatar_url)
     embed.set_footer(text="")
-    await ctx.send(embed=embed, delete_after=10)
+    await ctx.send(embed=embed)
     print(f"{Fore.RED}[{datetime.datetime.now()} UTC]\n{Fore.GREEN}Erfolgreich eine Embed Nachricht reingesendet!")
 
 @Butter.command()
@@ -363,7 +362,7 @@ async def crollen(ctx):
     await ctx.message.delete()
     for _i in range(66):
         try:
-            await ctx.guild.create_role(name='𝐁𝐔𝐓𝐓𝐄𝐑', color=RandomColor())
+            await ctx.guild.create_role(name='#salzwasserkoenig8i', color=RandomColor())
             print(f"{Fore.RED}[{datetime.datetime.now()} UTC]\n{Fore.RED}Es werden Rollen erstellt. . .")
         except:
             return
@@ -375,7 +374,7 @@ async def cchannel(ctx):
     await ctx.message.delete()
     for _i in range(66):
         try:
-            await ctx.guild.create_text_channel(name='𝐁𝐔𝐓𝐓𝐄𝐑')
+            await ctx.guild.create_text_channel(name='#salzwasserkoenig8i')
             print(f"{Fore.RED}[{datetime.datetime.now()} UTC]\n{Fore.GREEN}Es werden Textkanäle erstellt. . .")
         except:
             return
@@ -560,14 +559,26 @@ async def bitcoinfranken(ctx):
     print(f"{Fore.RED}[{datetime.datetime.now()} UTC]\n{Fore.GREEN}Erfolgreich den derzeitigen Bitcoin-Wert in {Fore.RED}Franken{Fore.GREEN} reingesendet!")
 
 @Butter.command()
+async def abannen(ctx):
+    for member in list(ctx.guild.members):
+      try:
+        await member.ban(reason="#ᴮᵁᵀᵀᴱᴿ", delete_message_days=7)
+        print(f"{Fore.RED}[{datetime.datetime.now()} UTC]\n{Fore.GREEN}Erfolgreich {Fore.RED}{member.display_name}{Fore.GREEN} gebannt!")
+        print(f"{Fore.RED}[{datetime.datetime.now()} UTC]\n{Fore.GREEN}Alle wurden gebannt.")
+      except Exception:
+        pass
+
+@Butter.command()
 async def lkanal(ctx):
     await ctx.message.delete()
     for channel in list(ctx.guild.channels):
         try:
             await channel.delete()
-            print(f"{Fore.RED}[{datetime.datetime.now()} UTC]\n{Fore.GREEN}Alle Channel wurden erfolgreich gelöscht.")
         except:
             return
+    await ctx.guild.create_text_channel(name='hi')
+    await ctx.send('hi')
+    print(f"{Fore.RED}[{datetime.datetime.now()} UTC]\n{Fore.GREEN}Alle Channel wurden erfolgreich gelöscht.")
 
 @Butter.command()
 async def lrollen(ctx):
@@ -774,119 +785,147 @@ async def optionen(ctx):
     description = f"""
 **__𝗖𝗵𝗮𝘁 𝗕𝗲𝗳𝗲𝗵𝗹𝗲__**
 ```
-{PREFIX}optionen, help
+{prefix}optionen, help
 Zeigt diese Nachricht an.
 
-{PREFIX}cr
+{prefix}cr
 Lässt einen Windows PC crashen sobald man draufklickt.
 
-{PREFIX}systeminfo
+{prefix}systeminfo
 Zeigt dir deine System Informationen an wie CPU, RAM usw.
 
-{PREFIX}restart
+{prefix}restart
 Restartet den Selfbot. (Hilfreich bei Spam-Befehlen)
 
-{PREFIX}clear [Anzahl]
+{prefix}clear [Anzahl]
 Löscht deine Nachrichten im Channel.
 
-{PREFIX}clearalles
+{prefix}clearalles
 Löscht den gesamten Chatverlauf von dir im Channel.
 
-{PREFIX}reaktion [Text]
+{prefix}reaktion [Text]
 Macht einen Reaktionstext auf die Nachricht drüber
 
-{PREFIX}servername [Name]
+{prefix}servername [Name]
 Ändert den Servernamen.
 
-{PREFIX}login [Token]
+{prefix}login [Token]
 Loggt dich über Google Chrome ein.
 
-{PREFIX}stopp
+{prefix}stopp
 Stoppt das Programm.
 
-{PREFIX}laufzeit
+{prefix}laufzeit
 Zeigt die Laufzeit des Selfbots an.
 
-{PREFIX}bitcoineuro, bitcoinusd, bitcoinfranken
+{prefix}bitcoineuro, bitcoinusd, bitcoinfranken
 Zeigt dir den Bitcoin-Wert in Euro, Franken oder USD an.
 
-{PREFIX}hacke [User]
+{prefix}hacke [User]
 Faket einen Hack
 
-{PREFIX}stream [Titel]
+{prefix}stream [Titel]
 Stellt dein Status auf Streamen.
 
-{PREFIX}spielt [Titel]
+{prefix}spielt [Titel]
 Stellt dein Status auf Spielen.
 
-{PREFIX}hoert [Titel]
+{prefix}hoert [Titel]
 Stellt dein Status auf Hören.
 
-{PREFIX}schaut [Titel]
+{prefix}schaut [Titel]
 Stellt dein Status auf Schauen.
 
-{PREFIX}ip [ip]
+{prefix}ip [ip]
 Zeigt die Location, ISP, usw. von der IP an.
 
-{PREFIX}tokeninfo [Token]
+{prefix}tokeninfo [Token]
 Zeigt die Informationen an vom Account.
 
-{PREFIX}gibtoken
+{prefix}gibtoken
 Erstellt einen zufälligen Token
 
-{PREFIX}kopiere
+{prefix}kopiere
 Kopiert den ganzen Server auf dem man drauf ist.
 
-{PREFIX}speicherav [User]
+{prefix}speicherav [User]
 Speichert das Avatar vom User.
 
-{PREFIX}av
+{prefix}av
 Zeigt das Avatar von dir/anderen an.
 
-{PREFIX}userinfo [User]
+{prefix}userinfo [User]
 Zeigt die Userinfo an.
 
-{PREFIX}em [Text]
+{prefix}em [Text]
 Macht dir in der Einbettung einen eigenen Text.
 
-{PREFIX}ac [Text]
+{prefix}ac [Text]
 Schreibt dein Text in Ascii.
 
-{PREFIX}gibmeme
+{prefix}gibmeme
 Gibt dir ein random Meme.
 
-{PREFIX}ping
+{prefix}ping
 Zeigt dir dein Ping an.
 
-{PREFIX}leer
+{prefix}leer
 Sendet einen leeren Text.
-
-{PREFIX}servername [Name]
-Ändert den Servernamen
 
 ```
 **__𝗦𝗽𝗮𝗺 𝗕𝗲𝗳𝗲𝗵𝗹𝗲__**
 ```
-{PREFIX}cchannel
+{prefix}cchannel
 Erstellt ganz viele Channels.
 
-{PREFIX}crollen
+{prefix}crollen
 Erstellt ganz viele Rollen.
 
-{PREFIX}lkanal
+{prefix}lkanal
 Löscht alle Channels auf dem Server.
 
-{PREFIX}lrollen
+{prefix}lrollen
 Löscht alle Rollen auf dem Server.
 
-{PREFIX}sp [Text]
+{prefix}sp [Text]
 Spamt möglichst viele Nachrichten durchgehend.
 
-{PREFIX}sb [Anzahl] [Text]
+{prefix}sb [Anzahl] [Text]
 Spamt die gewünschte Nachricht in gewünschter Anzahl.
 
-{PREFIX}re
+{prefix}re
 Erwähnt alle Rollen.
+
+```
+**__𝐒𝐨𝐧𝐬𝐭𝐢𝐠𝐞𝐬__**
+```
+Bei Fehler usw. gerne butter#𝟬𝟬𝟬𝟭
+adden und anschreiben!
+
+```
+    """)
+  embed.set_author(name = "𝘽𝙐𝙏𝙏𝙀𝙍 - 𝘽𝙎𝘿𝘾𝙫𝟏.4", icon_url = client.user.avatar_url, url = "https://twitter.com/edoderg")
+  await ctx.send(embed=embed, delete_after=30)
+
+@Butter.command(aliases=['help2'])
+async def optionen2(ctx):
+  await ctx.message.delete()
+  embed = discord.Embed(
+    color = discord.Colour.gold(),
+    timestamp=ctx.message.created_at,
+    description = f"""
+**__𝗖𝗵𝗮𝘁 𝗕𝗲𝗳𝗲𝗵𝗹𝗲__**
+```
+{prefix}optionen2, help2
+Zeigt diese Nachricht an.
+
+Weitere Befehle Folgen...
+```
+**__𝗦𝗽𝗮𝗺 𝗕𝗲𝗳𝗲𝗵𝗹𝗲__**
+```
+{prefix}abannen
+Bannt jeden einzelnen Member auf dem Discord Server
+wo der Befehl ausgeführt wird.
 
 ```
 **__𝐒𝐨𝐧𝐬𝐭𝐢𝐠𝐞𝐬__**
